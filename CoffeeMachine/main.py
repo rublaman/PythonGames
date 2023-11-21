@@ -1,4 +1,5 @@
 from data import MENU, resources
+from time import sleep
 
 
 def turn_off() -> None:
@@ -63,7 +64,13 @@ def make_coffee(resources_machine: dict, coffee: str, money: float):
             resources_machine = check_transaction(resources_machine, coffee)
 
             print(f"Here is ${str(round(total_money, 2))} dollars in change.")
-            print(f"Here is your {coffee}☕. Enjoy!")
+
+            for i in (range(20)):
+                complete_percentage = int((i + 1) / 20 * 100)
+                print(f"\r[{'#' * i}{' ' * (20 - i - 1)}] {complete_percentage}%", end="", flush=True)
+                sleep(0.5)
+
+            print(f"\nHere is your {coffee}☕. Enjoy!")
             run_machine(resources_machine, money)
         else:
             print(f"Sorry that's not enough money. Money refunded.")
