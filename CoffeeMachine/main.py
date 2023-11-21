@@ -62,8 +62,11 @@ def make_coffee(resources_machine: dict, coffee: str, money: float):
             money += MENU[coffee]["cost"]
             resources_machine = check_transaction(resources_machine, coffee)
 
-
+            print(f"Here is ${str(round(total_money, 2))} dollars in change.")
             print(f"Here is your {coffee}☕. Enjoy!")
+            run_machine(resources_machine, money)
+        else:
+            print(f"Sorry that's not enough money. Money refunded.")
             run_machine(resources_machine, money)
     else:
         lack_resources = ', '.join(enough_resources)
