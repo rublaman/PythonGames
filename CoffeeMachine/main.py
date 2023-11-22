@@ -1,4 +1,4 @@
-from data import MENU, resources
+from CoffeeMachine.data import MENU, resources
 from time import sleep
 
 
@@ -85,4 +85,5 @@ def run_machine(resources_machine: dict, money: float):
     check_option(user_input, resources_machine, money)
 
 
-run_machine(resources, 0)
+def start():
+    run_machine(resources, 0)
