@@ -16,3 +16,5 @@ match user_option:
         print("TO-DO")
     case _:
         print("Bye!")
+
+print("HI")
