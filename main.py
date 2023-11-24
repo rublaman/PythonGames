@@ -1,6 +1,7 @@
 from CoffeeMachine.main import start as coffee_machine
 from CoffeeMachineOOP.main import start as coffee_machine_oop
 from QuizGame.main import start as quiz_game
+from HirsPainting.main import start as hirs_painting
 
 
 print("1. Coffee Machine")
@@ -16,5 +17,7 @@ match user_option:
         coffee_machine_oop()
     case "3":
         quiz_game()
+    case "4":
+        hirs_painting()
     case _:
         print("Bye!")
