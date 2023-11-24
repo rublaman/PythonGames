@@ -7,6 +7,7 @@ from HirsPainting.main import start as hirs_painting
 print("1. Coffee Machine")
 print("2. Coffee Machine OOP")
 print("3. Quiz Game")
+print("4. Hirs Painting")
 
 user_option = input("What project do you want to test? (Insert number) ")
 
