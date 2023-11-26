@@ -1,4 +1,6 @@
-from turtle import Turtle, Screen
+from turtle import Screen
+from SnakeGame.snake import Snake
+import time
 
 
 def start():
@@ -6,20 +8,16 @@ def start():
     screen.setup(width=600, height=600)
     screen.bgcolor("black")
     screen.title("@rublaman Snake Game")
+    screen.tracer(0)
 
-    snake_segment_list = []
-    create_snake(snake_segment_list)
+    snake = Snake()
+
+    is_game_on = True
+    while is_game_on:
+        screen.update()
+        time.sleep(0.1)
+
+        snake.move()
 
     screen.exitonclick()
-
-
-def create_snake(snake_segment_list: list[Turtle]):
-    new_snake_segment_list = snake_segment_list
-    if len(snake_segment_list) == 0:
-        for i in range(0, 3):
-            snake_block = Turtle("square")
-            snake_block.color("white")
-            snake_block.penup()
-            snake_block.goto(i * -20, 0)
-            new_snake_segment_list.append(snake_block)
 
