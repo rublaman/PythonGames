@@ -37,10 +37,8 @@ def start():
             is_game_on = False
             scoreboard.game_over()
 
-        for segment in snake.snake_segment_list:
-            if segment == snake.head:
-                pass
-            elif snake.head.distance(segment) < 10:
+        for segment in snake.snake_segment_list[1:]:
+            if snake.head.distance(segment) < 10:
                 is_game_on = False
                 scoreboard.game_over()
 
