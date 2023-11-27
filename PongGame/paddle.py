@@ -4,6 +4,7 @@ UP = 90
 DOWN = 270
 STEP = 20
 
+
 class Paddle(Turtle):
 
     def __init__(self, position: tuple):
