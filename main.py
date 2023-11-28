@@ -5,6 +5,8 @@ from HirsPainting.main import start as hirs_painting
 from TurtleRace.main import start_race as turtle_race
 from SnakeGame.main import start as snake_game
 from PongGame.main import start as pong_game
+from TurtleCrossing.main import start as turtle_crossing_game
+
 
 
 print("1. Coffee Machine")
@@ -14,6 +16,7 @@ print("4. Hirs Painting")
 print("5. Turtle Race")
 print("6. Snake Game")
 print("7. Pong Game")
+print("8. Turtle Game")
 
 user_option = input("What project do you want to test? (Insert number) ")
 
@@ -32,5 +35,7 @@ match user_option:
         snake_game()
     case "7":
         pong_game()
+    case "8":
+        turtle_crossing_game()
     case _:
         print("Bye!")
