@@ -5,8 +5,6 @@ from HirsPainting.main import start as hirs_painting
 from TurtleRace.main import start_race as turtle_race
 from SnakeGame.main import start as snake_game
 from PongGame.main import start as pong_game
-from TurtleCrossing.main import start as turtle_crossing_game
-
 
 
 print("1. Coffee Machine")
@@ -36,6 +34,6 @@ match user_option:
     case "7":
         pong_game()
     case "8":
-        turtle_crossing_game()
+        print("Test")
     case _:
         print("Bye!")
