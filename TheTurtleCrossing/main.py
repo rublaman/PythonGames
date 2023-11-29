@@ -12,6 +12,7 @@ def start():
 
     turtle = Player()
     scoreboard = Scoreboard()
+    cars = CarManager()
 
     screen.onkey(turtle.move_up, "Up")
     screen.onkey(turtle.move_left, "Left")
@@ -24,7 +25,16 @@ def start():
         time.sleep(0.1)
         screen.update()
 
+        cars.move()
+
         if turtle.ycor() > 280:
             turtle.finish_line()
             scoreboard.increase_scoreboard()
-            #speed ++
+            cars.increment_speed()
+
+        for car in cars.list_of_cars:
+            if car.distance(turtle) < 20:
+                game_is_on = False
+                scoreboard.game_over()
+
+    screen.exitonclick()
