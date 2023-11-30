@@ -34,11 +34,12 @@ def start():
             scoreboard.increase_scoreboard()
 
         if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-            scoreboard.reset()
+            scoreboard.reset_score()
             snake.reset()
 
         for segment in snake.snake_segment_list[1:]:
-            scoreboard.reset()
-            snake.reset()
+            if snake.head.distance(segment) < 10:
+                scoreboard.reset_score()
+                snake.reset()
 
     screen.exitonclick()
