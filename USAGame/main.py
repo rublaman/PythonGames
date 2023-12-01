@@ -8,10 +8,4 @@ image_path = "blank_states_img.gif"
 screen.addshape(image_path)
 turtle.shape(image_path)
 
-
-def get_mouse_click_coor(x, y):
-    print(x, y)
-
-
-screen.onscreenclick(get_mouse_click_coor)
-screen.mainloop()
+answer_input = screen.textinput(title="Guess the State", prompt="What's another states name?")
