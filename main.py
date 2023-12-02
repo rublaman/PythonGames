@@ -6,6 +6,7 @@ from TurtleRace.main import start_race as turtle_race
 from SnakeGame.main import start as snake_game
 from PongGame.main import start as pong_game
 from TheTurtleCrossing.main import start as turtle_crossing_game
+from USAGame.main import start as guess_usa_states
 
 
 print("1. Coffee Machine")
@@ -16,6 +17,7 @@ print("5. Turtle Race")
 print("6. Snake Game")
 print("7. Pong Game")
 print("8. Turtle Game")
+print("9. Guess states from USA")
 
 user_option = input("What project do you want to test? (Insert number) ")
 
@@ -36,5 +38,7 @@ match user_option:
         pong_game()
     case "8":
         turtle_crossing_game()
+    case "9":
+        guess_usa_states()
     case _:
         print("Bye!")

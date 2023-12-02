@@ -1,5 +1,3 @@
-import os
-
 invites_names_path = "./Input/Names/invited_names.txt"
 starting_letter_path = "./Input/Letters/starting_letter.txt"
 
@@ -15,8 +13,3 @@ with open(starting_letter_path, "r") as starting_letter:
 
             with open(f"./Output/ReadyToSend/{correct_name}.txt", "w") as new_letter:
                 new_letter.write(letter)
-
-    
-#Hint1: This method will help you: https://www.w3schools.com/python/ref_file_readlines.asp
-    #Hint2: This method will also help you: https://www.w3schools.com/python/ref_string_replace.asp
-        #Hint3: THis method will help you: https://www.w3schools.com/python/ref_string_strip.asp
