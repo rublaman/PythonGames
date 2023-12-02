@@ -1,4 +1,6 @@
 from turtle import Turtle, Screen
+
+import pandas
 import pandas as pd
 
 screen = Screen()
@@ -29,3 +31,11 @@ while is_game_on or len(guessed_states) < 50:
 
     if answer_input == "Exit":
         is_game_on = False
+        missing_states = []
+
+        for state in list(df.state.to_list()):
+            if state not in guessed_states:
+                missing_states.append(state)
+
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
