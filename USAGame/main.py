@@ -17,23 +17,15 @@ def start():
     turtle.shape(image_path)
 
     df = pd.read_csv(csv_path)
-
-    is_game_on = True
     guessed_states = []
 
-    while is_game_on or len(guessed_states) < 50:
+    while len(guessed_states) < 50:
         answer_input = screen.textinput(title=f"{len(guessed_states)}/50 States Correct",
                                         prompt="What's another states name?").title()
         state_with_cords = df[df["state"] == answer_input]
 
         if answer_input == "Exit":
-            is_game_on = False
-            missing_states = []
-
-            for state in list(df.state.to_list()):
-                if state not in guessed_states:
-                    missing_states.append(state)
-
+            missing_states = [state for state in df.state.to_list() if state not in guessed_states]
             new_data = pandas.DataFrame(missing_states)
             new_data.to_csv("states_to_learn.csv")
             break
