@@ -2,9 +2,8 @@ import tkinter
 
 
 def button_clicked():
-    result = int(input_miles.get()) * 1.60934
-    result = round(result, 2)
-    label_km_result.config(text=result)
+    km = float(input_miles.get()) * 1.60934
+    label_km_result.config(text=f"{km:.2f}")
 
 
 window = tkinter.Tk()
