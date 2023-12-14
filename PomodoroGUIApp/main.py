@@ -21,10 +21,22 @@ window = tkinter.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 
+label_timer = tkinter.Label(text="Timer", font=(FONT_NAME, 35), fg=GREEN, bg=YELLOW)
+label_timer.grid(column=1, row=0)
+
 canvas = tkinter.Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 tomato_image = tkinter.PhotoImage(file="tomato.png")
 canvas.create_image(100, 112, image=tomato_image)
 canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
-canvas.pack()
+canvas.grid(column=1, row=1)
+
+button_start = tkinter.Button(text="Start", highlightthickness=0)
+button_start.grid(column=0, row=2)
+
+button_reset = tkinter.Button(text="Reset", highlightthickness=0)
+button_reset.grid(column=2, row=2)
+
+label_check = tkinter.Label(text="✔", font=(FONT_NAME, 15), fg=GREEN, bg=YELLOW)
+label_check.grid(column=1, row=3)
 
 window.mainloop()
