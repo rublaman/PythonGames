@@ -7,6 +7,7 @@ from SnakeGame.main import start as snake_game
 from PongGame.main import start as pong_game
 from TheTurtleCrossing.main import start as turtle_crossing_game
 from USAGame.main import start as guess_usa_states
+from PomodoroGUIApp.main import app as pomodoro_timer
 
 
 print("1. Coffee Machine")
@@ -18,6 +19,7 @@ print("6. Snake Game")
 print("7. Pong Game")
 print("8. Turtle Game")
 print("9. Guess states from USA")
+print("10. Pomodoro timer")
 
 user_option = input("What project do you want to test? (Insert number) ")
 
@@ -40,5 +42,7 @@ match user_option:
         turtle_crossing_game()
     case "9":
         guess_usa_states()
+    case "10":
+        pomodoro_timer()
     case _:
         print("Bye!")
