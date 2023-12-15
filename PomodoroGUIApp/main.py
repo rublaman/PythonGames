@@ -11,9 +11,21 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    window.after_cancel(timer)
+    label_timer.config(text="Timer", fg=GREEN)
+    canvas.itemconfig(timer_text, text="00:00")
+    global reps
+    reps = 0
+
+
+
+
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -33,12 +45,9 @@ def start_timer():
         label_timer.config(text="Work", fg=GREEN)
         count_down(work_sec)
 
-    count_down(5 * 60)
-
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
-    global reps
     count_min = math.floor(count / 60)
     count_sec = count % 60
     if count_sec < 10:
@@ -46,12 +55,19 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        global timer
+        timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
+        mark = ""
+        work_sessions = math.floor(reps / 2)
+        for _ in range(work_sessions):
+            mark += "✔"
+        label_check.config(text=mark)
+
+    # ---------------------------- UI SETUP ------------------------------- #
 
 
-# ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
@@ -68,10 +84,10 @@ canvas.grid(column=1, row=1)
 button_start = tkinter.Button(text="Start", highlightthickness=0, command=start_timer)
 button_start.grid(column=0, row=2)
 
-button_reset = tkinter.Button(text="Reset", highlightthickness=0)
+button_reset = tkinter.Button(text="Reset", highlightthickness=0, command=reset_timer)
 button_reset.grid(column=2, row=2)
 
-label_check = tkinter.Label(text="✔", font=(FONT_NAME, 15), fg=GREEN, bg=YELLOW)
+label_check = tkinter.Label(font=(FONT_NAME, 15), fg=GREEN, bg=YELLOW)
 label_check.grid(column=1, row=3)
 
 window.mainloop()
