@@ -1,5 +1,6 @@
 import os.path
 from tkinter import *
+from tkinter import messagebox
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -13,14 +14,21 @@ def add_password():
     username = input_username.get()
     password = input_password.get()
 
-    current_dir_password = os.path.dirname(__file__)
-    file_path = os.path.join(current_dir_password, 'password.txt')
+    if len(website) == 0 or len(username) == 0 or len(password) == 0:
+        messagebox.showerror(title="Fields empty", message=f"You should fill website, username and password field")
+    else:
+        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {username} \n"
+                                                              f"Password: {password} \nIs it ok to save?")
 
-    with open(file_path, "a") as data_file:
-        data_file.write(f"{website} | {username} | {password}\n")
-        input_website.delete(0, END)
-        input_username.delete(0, END)
-        input_password.delete(0, END)
+        if is_ok:
+            current_dir_password = os.path.dirname(__file__)
+            file_path = os.path.join(current_dir_password, 'data.txt')
+
+            with open(file_path, "a") as data_file:
+                data_file.write(f"{website} | {username} | {password}\n")
+                input_website.delete(0, END)
+                input_username.delete(0, END)
+                input_password.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
