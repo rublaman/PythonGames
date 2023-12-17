@@ -3,6 +3,7 @@ import random
 from tkinter import *
 from tkinter import messagebox
 import pyperclip
+import json
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -30,6 +31,13 @@ def add_password():
     username = input_username.get()
     password = input_password.get()
 
+    new_data = {
+        website: {
+            "username": username,
+            "password": password
+        }
+    }
+
     if len(website) == 0 or len(username) == 0 or len(password) == 0:
         messagebox.showerror(title="Fields empty", message=f"You should fill website, username and password field")
     else:
@@ -38,10 +46,20 @@ def add_password():
 
         if is_ok:
             current_dir_password = os.path.dirname(__file__)
-            file_path = os.path.join(current_dir_password, 'data.txt')
+            file_path = os.path.join(current_dir_password, 'data.json')
 
-            with open(file_path, "a") as data_file:
-                data_file.write(f"{website} | {username} | {password}\n")
+            try:
+                with open(file_path, "r") as data_file:
+                    data = json.load(data_file)
+            except FileNotFoundError:
+                with open(file_path, "w") as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                data.update(new_data)
+
+                with open(file_path, "w") as data_file:
+                    json.dump(data, data_file, indent=4)
+            finally:
                 input_website.delete(0, END)
                 input_username.delete(0, END)
                 input_password.delete(0, END)
