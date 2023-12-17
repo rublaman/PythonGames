@@ -9,7 +9,18 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def add_password():
-    pass
+    website = input_website.get()
+    username = input_username.get()
+    password = input_password.get()
+
+    current_dir_password = os.path.dirname(__file__)
+    file_path = os.path.join(current_dir_password, 'password.txt')
+
+    with open(file_path, "a") as data_file:
+        data_file.write(f"{website} | {username} | {password}\n")
+        input_website.delete(0, END)
+        input_username.delete(0, END)
+        input_password.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -39,7 +50,8 @@ input_website = Entry(width=35)
 input_website.grid(column=1, row=1, columnspan=2)
 input_username = Entry(width=35)
 input_username.grid(column=1, row=2, columnspan=2)
-input_password = Entry(width=21)
+input_username.insert(0, "example@mail.com")
+input_password = Entry(width=17)
 input_password.grid(column=1, row=3)
 
 # Buttons
