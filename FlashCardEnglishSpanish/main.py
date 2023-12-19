@@ -15,22 +15,27 @@ img_path_wrong = os.path.join(current_dir, 'images/wrong.png')
 
 df = pd.read_csv(csv_english_word)
 dict_list = df.to_dict(orient="records")
-dict_list = [{element["English"]: element["Spanish"]} for element in dict_list]
-print(dict_list)
 
 
 # ---------------------------- NEW WORD -------------------------------- #
 def generate_new_word():
-    random_dict = random.choice(dict_list)
-    random_choose = random.choice(['key', 'value'])
+    canvas.itemconfig(canvas_image, image=img_card_front)
+    current_card = random.choice(dict_list)
+    canvas.itemconfigure(canvas_language, text="English")
+    canvas.itemconfigure(canvas_word, text=current_card["English"])
 
-    if random_choose == 'key':
-        result = random.choice(list(random_dict.keys()))
-    else:
-        result = random.choice(list(random_dict.values()))
-    canvas.itemconfigure(word, text=result)
+    window.after(3000, show_result, current_card)
 
-# ---------------------------- UI SETUP ------------------------------- #
+
+# ---------------------------- TRANSLATE WORD -------------------------- #
+def show_result(current_card):
+    canvas.itemconfigure(canvas_language, text="Spanish")
+    canvas.itemconfigure(canvas_word, text=current_card["Spanish"])
+    canvas.itemconfig(canvas_image, image=img_card_back)
+
+
+
+# ---------------------------- UI SETUP -------------------------------- #
 
 window = Tk()
 window.title("Flashy")
@@ -39,9 +44,10 @@ window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 # Canvas
 canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
 img_card_front = PhotoImage(file=img_path_card_front)
-canvas.create_image(400, 263, image=img_card_front)
-language = canvas.create_text(400, 150, text="Title", font=("Ariel", 40, "italic"))
-word = canvas.create_text(400, 263, text="word", font=("Ariel", 60, "bold"))
+img_card_back = PhotoImage(file=img_path_card_back)
+canvas_image = canvas.create_image(400, 263, image=img_card_front)
+canvas_language = canvas.create_text(400, 150, font=("Ariel", 40, "italic"))
+canvas_word = canvas.create_text(400, 263, font=("Ariel", 60, "bold"))
 canvas.grid(column=0, row=0, columnspan=2)
 
 # Buttons
@@ -52,5 +58,7 @@ button_wrong.grid(column=0, row=1)
 img_right = PhotoImage(file=img_path_right)
 button_wrong = Button(image=img_right, highlightthickness=0, command=generate_new_word)
 button_wrong.grid(column=1, row=1)
+
+generate_new_word()
 
 window.mainloop()
