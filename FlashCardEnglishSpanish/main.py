@@ -21,9 +21,14 @@ print(dict_list)
 
 # ---------------------------- NEW WORD -------------------------------- #
 def generate_new_word():
-    random_position = random.randint(0, 99)
-    canvas.itemconfigure(word, text=dict_list[random_position])
+    random_dict = random.choice(dict_list)
+    random_choose = random.choice(['key', 'value'])
 
+    if random_choose == 'key':
+        result = random.choice(list(random_dict.keys()))
+    else:
+        result = random.choice(list(random_dict.values()))
+    canvas.itemconfigure(word, text=result)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
