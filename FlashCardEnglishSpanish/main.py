@@ -15,24 +15,28 @@ img_path_wrong = os.path.join(current_dir, 'images/wrong.png')
 
 df = pd.read_csv(csv_english_word)
 dict_list = df.to_dict(orient="records")
+current_card = {}
 
 
 # ---------------------------- NEW WORD -------------------------------- #
 def generate_new_word():
-    canvas.itemconfig(canvas_image, image=img_card_front)
+    global current_card
+    global flip_timer
+
+    window.after_cancel(flip_timer)
     current_card = random.choice(dict_list)
+    canvas.itemconfig(canvas_image, image=img_card_front)
     canvas.itemconfigure(canvas_language, text="English")
     canvas.itemconfigure(canvas_word, text=current_card["English"])
 
-    window.after(3000, show_result, current_card)
+    flip_timer = window.after(3000, show_result)
 
 
 # ---------------------------- TRANSLATE WORD -------------------------- #
-def show_result(current_card):
+def show_result():
     canvas.itemconfigure(canvas_language, text="Spanish")
     canvas.itemconfigure(canvas_word, text=current_card["Spanish"])
     canvas.itemconfig(canvas_image, image=img_card_back)
-
 
 
 # ---------------------------- UI SETUP -------------------------------- #
@@ -40,6 +44,8 @@ def show_result(current_card):
 window = Tk()
 window.title("Flashy")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+
+
 
 # Canvas
 canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
@@ -59,6 +65,8 @@ img_right = PhotoImage(file=img_path_right)
 button_wrong = Button(image=img_right, highlightthickness=0, command=generate_new_word)
 button_wrong.grid(column=1, row=1)
 
+flip_timer = window.after(3000, func=show_result)
 generate_new_word()
+
 
 window.mainloop()
