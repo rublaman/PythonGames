@@ -2,7 +2,7 @@ import random
 import smtplib
 import datetime as dt
 import os
-from configparser import  ConfigParser
+from configparser import ConfigParser
 
 current_dir_password = os.path.dirname(__file__)
 file_path = os.path.join(current_dir_password, "quotes.txt")
