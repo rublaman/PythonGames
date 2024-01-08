@@ -14,3 +14,7 @@ r = requests.get(end_point, params=weather_params)
 r.raise_for_status()
 weather_data = r.json()
 
+id_weather_list = weather_ids = [x["weather"][0]["id"] for x in weather_data["list"] if x["weather"][0]["id"] < 700]
+
+if len(id_weather_list) >= 1:
+    print("Bring an umbrella")
