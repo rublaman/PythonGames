@@ -6,7 +6,6 @@ import os
 APP_ID = os.environ.get("APP_ID", "APP ID it doesn't exist")
 API_KEY = os.environ.get("API_KEY", "API_KEY it doesn't exist")
 
-# 2 Get Exercise stats with NLQ
 url = "https://trackapi.nutritionix.com/v2/natural/exercise"
 headers = {
     "Content-Type": "application/json",
@@ -14,18 +13,27 @@ headers = {
     "x-app-key": API_KEY
 }
 
+user_input = input("Which exercise you did?")
+
 data = {
-    "query": "swam for 1 hour"
+    "query": user_input
 }
 
-response = requests.post(url, headers=headers, json=data)
-if response.status_code == 200:
-    response = response.json()
-    print(response)
+response_nutritionix = requests.post(url, headers=headers, json=data)
+if response_nutritionix.status_code == 200:
+    response_nutritionix = response_nutritionix.json()
+    print(response_nutritionix)
 else:
-    print(f"Error in the request. Status code: {response.status_code}")
-    print(response.text)
+    print(f"Error in the request. Status code: {response_nutritionix.status_code}")
+    print(response_nutritionix.text)
 
-# 3 Setup Google Sheet with Sheety
+# sheety
+url = ""
+headers = {
+ "Authorization": ""
+}
+
+response_sheety = requests.post()
+
 
 # Saving data into google sheets
