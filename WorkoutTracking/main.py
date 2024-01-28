@@ -1,6 +1,6 @@
 import requests
-import datetime
 import os
+from datetime import datetime
 
 # NUTRITIONIX
 APP_ID = os.environ.get("APP_ID", "APP ID it doesn't exist")
@@ -28,20 +28,26 @@ else:
     print(response_nutritionix.text)
 
 # SHEETY
-SHEETY_API_URL = "https://api.sheety.co/-------------/workoutTracking/workouts"
+SHEETY_API_URL = "https://api.sheety.co/----------/workoutTracking/workouts"
 
 headers = {
   'Authorization': f'Basic ---------'
 }
 
-# Mock data
+today = datetime.now()
+today_str = today.strftime('%d/%m/%Y')
+time_str = today.strftime("%H:%M:%S")
+name = response_nutritionix['exercises'][0]['name'].title()
+duration = response_nutritionix['exercises'][0]['duration_min']
+calories = response_nutritionix['exercises'][0]['nf_calories']
+
 data = {
   "workout": {
-    "date": "28/07/2020",
-    "time": "10:00:00",
-    "exercise": "Yoga",
-    "duration": 60,
-    "calories": 200
+    "date": today_str,
+    "time": time_str,
+    "exercise": name,
+    "duration": duration,
+    "calories": calories
   }
 }
 
