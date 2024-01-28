@@ -2,7 +2,7 @@ import requests
 import datetime
 import os
 
-# nutritionix
+# NUTRITIONIX
 APP_ID = os.environ.get("APP_ID", "APP ID it doesn't exist")
 API_KEY = os.environ.get("API_KEY", "API_KEY it doesn't exist")
 
@@ -13,7 +13,7 @@ headers = {
     "x-app-key": API_KEY
 }
 
-user_input = input("Which exercise you did?")
+user_input = input("Which exercise you did? ")
 
 data = {
     "query": user_input
@@ -27,13 +27,22 @@ else:
     print(f"Error in the request. Status code: {response_nutritionix.status_code}")
     print(response_nutritionix.text)
 
-# sheety
-url = ""
+# SHEETY
+SHEETY_API_URL = "https://api.sheety.co/-------------/workoutTracking/workouts"
+
 headers = {
- "Authorization": ""
+  'Authorization': f'Basic ---------'
 }
 
-response_sheety = requests.post()
+# Mock data
+data = {
+  "workout": {
+    "date": "28/07/2020",
+    "time": "10:00:00",
+    "exercise": "Yoga",
+    "duration": 60,
+    "calories": 200
+  }
+}
 
-
-# Saving data into google sheets
+response = requests.post(SHEETY_API_URL, json=data, headers=headers)
