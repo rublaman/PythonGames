@@ -5,20 +5,21 @@ from datetime import datetime
 
 class DataManager:
     # This class is responsible for talking to the Google Sheet.
-    def __init__(self):
-        pass
-
-    def get_flights_from_google_sheet(self):
-        SHEETY_API_URL = "https://api.sheety.co/15c8f306457fd1b5f8dfc4449e832145/checkFlights/prices"
-
-        headers = {
-            'Authorization': f'Basic ----'
+    def __init__(self, api_key: str):
+        self.__API_URL = "https://api.sheety.co/15c8f306457fd1b5f8dfc4449e832145/checkFlights/prices"
+        self.__HEADERS = {
+            'Authorization': f'Basic {api_key}'
         }
 
-        response = requests.get(SHEETY_API_URL, headers=headers)
-        print(response.status_code)
+    def get_flights_from_google_sheet(self):
+        try:
+            response = requests.get(self.__API_URL, headers=self.__HEADERS)
+            response.raise_for_status()
+            data = response.json()
+            return data
+        except requests.exceptions.HTTPError as err:
+            print(f"Error in request: {err}")
 
 
-data = DataManager()
-
-data.get_flights_from_google_sheet()
+test = DataManager(api_key="")
+print(test.get_flights_from_google_sheet())
