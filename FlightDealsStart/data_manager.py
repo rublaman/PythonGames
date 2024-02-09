@@ -1,6 +1,4 @@
 import requests
-import os
-from datetime import datetime
 
 
 class DataManager:
@@ -11,7 +9,7 @@ class DataManager:
             'Authorization': f'Basic {api_key}'
         }
 
-    def get_flights_from_google_sheet(self):
+    def get_flights_from_google_sheet(self) -> dict:
         try:
             response = requests.get(self.__API_URL, headers=self.__HEADERS)
             response.raise_for_status()
@@ -21,5 +19,5 @@ class DataManager:
             print(f"Error in request: {err}")
 
 
-test = DataManager(api_key="")
+test = DataManager(api_key="dGVzdFJ1YmVuOlBhc3N3MHJk")
 print(test.get_flights_from_google_sheet())
