@@ -19,5 +19,5 @@ class DataManager:
             print(f"Error in request: {err}")
 
 
-test = DataManager(api_key="dGVzdFJ1YmVuOlBhc3N3MHJk")
+test = DataManager(api_key="")
 print(test.get_flights_from_google_sheet())
