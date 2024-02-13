@@ -8,7 +8,7 @@ class NotificationManager:
     def __init__(self, target_phone_number: str):
         self.target_phone_number = target_phone_number
 
-    def send_mail(self, flight_detail: dict) -> None:
+    def send_sms(self, flight_detail: dict) -> None:
         account_sid = os.environ['TWILIO_ACCOUNT_SID']
         auth_token = os.environ['TWILIO_AUTH_TOKEN']
         number_twilio = os.environ['TWILIO_PHONE_NUMBER']
