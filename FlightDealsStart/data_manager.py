@@ -20,4 +20,4 @@ class DataManager:
 
 
 # test = DataManager(api_key="")
-print(test.get_flights_from_google_sheet())
+# print(test.get_flights_from_google_sheet())
